@@ -8,7 +8,7 @@ module.exports = (robot) => {
   }); */
   robot.on('issues.opened', async context => {
     //consolet.log(context);
-    const params = context.issue({labels: 'help wanted'});
+    const params = context.issue({labels: ['help wanted']});
     //Create label
     return context.github.issues.addLabels(params);
   });
