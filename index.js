@@ -7,7 +7,7 @@ module.exports = (robot) => {
     return context.github.issues.createComment(params);
   }); */
   robot.on('issues.opened', async context => {
-    robot.log(context);
+    console.log(context);
     const params = context.issue({name: 'help wanted', color: '3BB273'});
     //Create label
     return context.github.issues.createLabel(params);
