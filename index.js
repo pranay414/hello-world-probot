@@ -8,9 +8,9 @@ module.exports = (robot) => {
   }); */
   robot.on('issues.opened', async context => {
     //consolet.log(context);
-    const params = context.issue({name: 'low hanging fruit', color: '3BB273'});
+    const params = context.issue({labels: 'help wanted'});
     //Create label
-    return context.github.issues.createLabel(params);
+    return context.github.issues.addLabels(params);
   });
 
   // For more information on building apps:
