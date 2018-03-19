@@ -1,3 +1,5 @@
+const commands = require('probot-commands');
+
 module.exports = (robot) => {
   // Your code here
   robot.log('Yay, the app was loaded!');
@@ -12,7 +14,11 @@ module.exports = (robot) => {
     //Create label
     return context.github.issues.addLabels(params);
   });
-
+  
+  //Listen for commands like /assign
+  commands(robot,'assign',(context,command) => {
+    return context.github.issues.addLabels({labels: ['assigned']});
+  });
   // For more information on building apps:
   // https://probot.github.io/docs/
 
