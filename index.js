@@ -16,8 +16,10 @@ module.exports = (robot) => {
   });
   
   //Listen for commands like /assign
-  commands(robot,'assign',(context,command) => {
-    return context.github.issues.addLabels({labels: ['assigned']});
+  robot.on('issue_comment.created', async context => {
+    commands(robot,'assign',(context,command) => {
+      return context.github.issues.addLabels({labels: ['assigned']});
+    });
   });
   // For more information on building apps:
   // https://probot.github.io/docs/
