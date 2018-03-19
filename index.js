@@ -10,17 +10,15 @@ module.exports = (robot) => {
   }); */
   robot.on('issues.opened', async context => {
     //consolet.log(context);
-    const params = context.issue({labels: ['help wanted']});
+    const params = context.issue({labels: ['help wanted']})
     //Create label
-    return context.github.issues.addLabels(params);
-  });
+    return context.github.issues.addLabels(params)
+  })
   
   //Listen for commands like /assign
-  robot.on('issue_comment.created', async context => {
-    commands(robot,'assign',(context,command) => {
-      return context.github.issues.addLabels({labels: ['assigned']});
-    });
-  });
+  commands(robot,'assign',(context,command) => {
+    return context.github.issues.addLabels(context.issue({labels: ['assigned']}))
+  })
   // For more information on building apps:
   // https://probot.github.io/docs/
 
