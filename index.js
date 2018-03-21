@@ -19,7 +19,7 @@ module.exports = (robot) => {
   commands(robot,'assign',(context,command) => {
     //return context.github.issues.addLabels(context.issue({labels: ['assigned']}))
     console.log(`payload: ${context.payload}`)
-    return context.github.issues.addAssigneesToIssue(context.issue({assignees: [`${context.comment.user.login}`]}))
+    return context.github.issues.addAssigneesToIssue(context.issue({assignees: [`pranay414`]}))
   })
   // For more information on building apps:
   // https://probot.github.io/docs/
