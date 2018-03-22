@@ -14,12 +14,16 @@ module.exports = (robot) => {
     //Create label
     return context.github.issues.addLabels(params)
   })
+
+  robot.on('issue_comment.created', async context => {
+
+  })
   
   //Listen for commands like /assign
   commands(robot,'assign',(context,command) => {
     //return context.github.issues.addLabels(context.issue({labels: ['assigned']}))
     robot.log(`payload: ${context.payload}`)
-    return context.github.issues.addAssigneesToIssue(context.issue({assignees: [`pranay414`]}))
+    return context.github.issues.addAssigneesToIssue(context.issue({assignees: [`${context.payload.sender.login}`]}))
   })
   // For more information on building apps:
   // https://probot.github.io/docs/
