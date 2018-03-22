@@ -22,6 +22,10 @@ module.exports = (robot) => {
     return context.github.issues.addAssigneesToIssue(context.issue({assignees: [`${context.payload.sender.login}`]}))
   })
 
+  comment(robot,'assign',(context,command) => {
+    return context.github.issues.addLabels(context.issue({labels: ['assigned']}))
+  })
+
   //Listen for command /unassign
   commands(robot, 'unassign',(context,command) => {
     let assignee = '';
@@ -31,5 +35,5 @@ module.exports = (robot) => {
     }
     return context.github.issues.removeAssigneesFromIssue(context.issue({assignees: [`${assignee}`]}))
   })
-  
+
 }
