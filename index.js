@@ -3,11 +3,7 @@ const commands = require('probot-commands');
 module.exports = (robot) => {
   // Your code here
   robot.log('Yay, the app was loaded!');
-/*   robot.on('issues.opened', async context => {
-    const params = context.issue({body: 'Thanks for reporting! We\'ll look into this'});
-    //Post comment
-    return context.github.issues.createComment(params);
-  }); */
+
   robot.on('issues.opened', async context => {
     //consolet.log(context);
     const params = context.issue({labels: ['help wanted']})
@@ -19,15 +15,21 @@ module.exports = (robot) => {
 
   })
   
-  //Listen for commands like /assign
+  //Listen for command /assign
   commands(robot,'assign',(context,command) => {
     //return context.github.issues.addLabels(context.issue({labels: ['assigned']}))
     robot.log(`payload: ${context.payload}`)
     return context.github.issues.addAssigneesToIssue(context.issue({assignees: [`${context.payload.sender.login}`]}))
   })
-  // For more information on building apps:
-  // https://probot.github.io/docs/
 
-  // To get your app running against GitHub, see:
-  // https://probot.github.io/docs/development/
+  //Listen for command /unassign
+  commands(robot, 'unassign',(context,command) => {
+    let assignee = '';
+    const check = context.issue.checkAssignee(context.issue({assignee: `${context.payload.sender.login}`}))
+    if(check == 1) {
+      assignee = context.payload.sender.login
+    }
+    return context.github.issues.removeAssigneesFromIssue(context.issue({assignees: [`${assignee}`]}))
+  })
+  
 }
