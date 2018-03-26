@@ -1,7 +1,7 @@
 const commands = require('probot-commands')
 const twitter = require('twitter')
 
-const client = new Twitter({
+var client = new Twitter({
   consumer_key: 'RkAhdeURYLmpxRXiLaoziYxaM',
   consumer_secret: '7ZP7hmWDT1CAIS0C1biYb3Wam5CXdeWsz9I1xEsZcBUDUcIRuI',
   access_token_key: '811290673643159554-chPrdXO0hKW7CqyUHgiuhQkpTFdQr1D',
