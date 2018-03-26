@@ -16,7 +16,7 @@ module.exports = (robot) => {
     //consolet.log(context);
     const params = context.issue({labels: ['help wanted']})
     //Post a tweet when an issue is opened
-    client.post('statuses/update', {status: 'Pull request opened in DiaBeat!'}, (err, tweet, res) => {
+    client.post('statuses/update', {status: `Pull request opened in ${context.issue.repo}!`}, (err, tweet, res) => {
       if(err) throw err
       console.log(tweet)
       console.log(res)
