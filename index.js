@@ -1,11 +1,12 @@
 const commands = require('probot-commands')
 const Twitter = require('twitter')
+const keys = require('./keys')
 
 var client = new Twitter({
-  consumer_key: 'RkAhdeURYLmpxRXiLaoziYxaM',
-  consumer_secret: '7ZP7hmWDT1CAIS0C1biYb3Wam5CXdeWsz9I1xEsZcBUDUcIRuI',
-  access_token_key: '811290673643159554-chPrdXO0hKW7CqyUHgiuhQkpTFdQr1D',
-  access_token_secret: 'ggBCkmklItrhMnI9d1G7metBXynVvixiFC5IkLE0JaoSY'
+  consumer_key: keys.CONSUMER_KEY,
+  consumer_secret: keys.CONSUMER_SECRET,
+  access_token_key: keys.ACCESS_TOKEN_KEY,
+  access_token_secret: keys.ACCESS_TOKEN_SECRET
 })
 
 module.exports = (robot) => {
@@ -16,7 +17,7 @@ module.exports = (robot) => {
     //consolet.log(context);
     const params = context.issue({labels: ['help wanted']})
     //Post a tweet when an issue is opened
-    client.post('statuses/update', {status: `Pull request opened in ${context.payload.repository.full_name}!`}, (err, tweet, res) => {
+    client.post('statuses/update', {status: `Pull request opened in ${context.payload.repository.full_name}!\n-`}, (err, tweet, res) => {
       if(err) throw err
       console.log(tweet)
       console.log(res)
@@ -26,7 +27,7 @@ module.exports = (robot) => {
   })
 
   robot.on('issue_comment.created', async context => {
-
+    //TODO
   })
   
   //Listen for command /assign
@@ -36,7 +37,7 @@ module.exports = (robot) => {
     return context.github.issues.addAssigneesToIssue(context.issue({assignees: [`${context.payload.sender.login}`]}))
   })
 
-  //Listen for command /unassign
+  //TODO: Listen for command /unassign
   commands(robot, 'unassign',(context,command) => {
     let assignee = '';
     const check = context.issue.checkAssignee(context.issue({assignee: `${context.payload.sender.login}`}))
