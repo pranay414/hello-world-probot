@@ -1,6 +1,6 @@
-# hello-world
+# Probot App
 
-> a GitHub App built with [probot](https://github.com/probot/probot) that 
+> a GitHub App built with [probot](https://github.com/probot/probot) that tweets to my twitter account a pull request is created.
 
 ## Setup
 
